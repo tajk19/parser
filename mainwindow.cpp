@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->lineEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     ui->pushButton_2->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    //Поправить
     auto layout = this->layout();
     layout->setContentsMargins(5,5,5,5);
     layout->setSpacing(5);
