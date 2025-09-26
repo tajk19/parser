@@ -25,8 +25,6 @@ private slots:
 
     void on_lineEdit_textChanged(const QString &arg1);
 
-    void on_mainTable_cellClicked(int row, int column);
-
 public slots:
     void takeDataFromParse(QJsonArray data, int size);
 
