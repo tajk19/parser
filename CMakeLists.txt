@@ -20,8 +20,8 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
 #---------------------
-        parser.h
-        parser.cpp
+        Parser.h
+        Parser.cpp
 
 )
 

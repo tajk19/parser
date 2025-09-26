@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QJsonObject>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,11 +21,21 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_lineEdit_returnPressed();
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_mainTable_cellClicked(int row, int column);
+
+public slots:
+    void takeDataFromParse(QJsonArray data, int size);
+
 signals:
-    void parseXML();
-    void takeDataFromParse();
+    void parseXML(QString path);
+
 
 private:
     Ui::MainWindow *ui;
+    QString fileName;
 };
 #endif // MAINWINDOW_H
