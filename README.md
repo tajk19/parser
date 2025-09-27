@@ -10,7 +10,7 @@ mkdir build && cd build
 cmake ..
 make
 ```
-##Запуск приложения
+## Запуск приложения
 В папке build будет исполянемый файл
 ```bash
 ./parser
