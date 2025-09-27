@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    qDebug()<< "Начался парсинг файла: " << fileName;
+    //qDebug()<< "Начался парсинг файла: " << fileName;
     emit parseXML(fileName);
 }
 
@@ -49,7 +49,27 @@ void MainWindow::on_pushButton_2_clicked()
 
 }
 
-void MainWindow::takeDataFromParse(QJsonArray data, int size){
+void MainWindow::on_lineEdit_returnPressed() //Ручной ввод пути через enter
+{
+    QString path = ui->lineEdit->text();
+        QFileInfo fileInfo(path);
+
+        if (!fileInfo.exists() || !fileInfo.isFile()) {
+            QMessageBox::warning(this, "Ошибка", "Файл не найден или неверный путь!");
+            return;
+        }
+
+        if (fileInfo.suffix() != "xml") {
+            QMessageBox::warning(this, "Ошибка", "Неверный тип файла (ожидался .xml)");
+            return;
+        }
+        fileName = path;
+        ui->lineEdit->setText(fileName);
+        ui->lineEdit->setCursorPosition(0);
+        ui->pushButton->setEnabled(true);
+}
+
+void MainWindow::takeDataFromParse(QJsonArray data, int size){ //Заполняем таблицу из полученных данных
     auto table = ui->mainTable;
     table->setRowCount(size);
     table->setColumnCount(2);
@@ -78,29 +98,8 @@ void MainWindow::takeDataFromParse(QJsonArray data, int size){
     table->show();
 };
 
-void MainWindow::on_lineEdit_returnPressed()
-{
-    QString path = ui->lineEdit->text();
-        QFileInfo fileInfo(path);
 
-        if (!fileInfo.exists() || !fileInfo.isFile()) {
-            QMessageBox::warning(this, "Ошибка", "Файл не найден или неверный путь!");
-            return;
-        }
-
-        if (fileInfo.suffix() != "xml") {  // например, только .json
-            QMessageBox::warning(this, "Ошибка", "Неверный тип файла (ожидался .xml)");
-            return;
-        }
-        fileName = path;
-        ui->lineEdit->setText(fileName);
-        ui->lineEdit->setCursorPosition(0);
-        ui->pushButton->setEnabled(true);
-        return;
-}
-
-
-void MainWindow::on_lineEdit_textChanged(const QString &arg1)
+void MainWindow::on_lineEdit_textChanged(const QString &arg1)//Выключение кнопки при изменении пути
 {
     ui->pushButton->setEnabled(false);
 }

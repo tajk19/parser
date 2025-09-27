@@ -32,7 +32,7 @@ QJsonArray Parser::parseXML(QString path){
 
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Cannot open file";
+        //qDebug() << "Cannot open file";
         return data;
     }
     QXmlStreamReader xml(&file);
@@ -74,9 +74,8 @@ QJsonArray Parser::parseXML(QString path){
         }
     }
 
-
     if (xml.hasError()) {
-        qDebug() << "XML Error:" << xml.errorString();
+        //qDebug() << "XML Error:" << xml.errorString();
     }
     emit dataReady(data, size);
     return data;
